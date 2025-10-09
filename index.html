@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaskCol</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <h1>Col's Task List</h1>
+
+  <div id="todo-container">
+    <input type="text" id="taskInput" placeholder="Enter a new task" />
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <div class="filters">
+      <button onclick="showAll()">All</button>
+      <button onclick="showActive()">Active</button>
+      <button onclick="showCompleted()">Completed</button>
+      <button onclick="clearCompleted()">Clear Completed</button>
+    </div>
+
+    <p id="taskCount"></p>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
