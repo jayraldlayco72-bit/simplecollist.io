@@ -13,26 +13,21 @@ function addTask() {
   }
 }
 
-// 2. Render tasks list and update count
+// 6. Render tasks list and update count
 function renderTasks(displayTasks = tasks) {
   const list = document.getElementById("taskList");
-  list.innerHTML = "";
-
-  displayTasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.className = task.completed ? "completed" : "";
-
-    li.innerHTML = `
-      <span onclick="toggleTask(${index})">${task.text}</span>
-      <button onclick="removeTask(${index})">Remove</button>
-    `;
-
-    list.appendChild(li);
-  });
+  list.innerHTML = displayTasks
+    .map((t, i) => `
+      <li class="${t.completed ? "completed" : ""}">
+        <span onclick="toggleTask(${i})">${t.text}</span>
+        <button onclick="removeTask(${i})">Remove</button>
+      </li>
+    `)
+    .join("");
 
   // Update tasks remaining count
-  const remaining = tasks.filter(task => !task.completed).length;
-  document.getElementById("taskCount").textContent = `Tasks remaining: ${remaining}`;
+  document.getElementById("taskCount").textContent =
+    `Tasks remaining: ${tasks.filter(t => !t.completed).length}`;
 }
 
 // Show all tasks on page load
