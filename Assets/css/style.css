@@ -61,3 +61,93 @@ li {
 .filters button {
   margin-right: 5px;
 }
+
+/* Animation for adding a new task */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Make tasks fade and slide in smoothly when added */
+#taskList li {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInTask 0.4s ease forwards;
+}
+
+@keyframes fadeInTask {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth hover highlight */
+#taskList li:hover {
+  background-color: #c67bff;
+  transition: background-color 0.2s;
+}
+
+/* Smooth color + strike-through transition for completed tasks */
+li.completed {
+  color: gray;
+  text-decoration: line-through;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+/* Add a little "pop" when toggling completion */
+li.completed span {
+  animation: popTask 0.2s ease;
+}
+
+@keyframes popTask {
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Loading Screen Styles */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #a21bff; /* matches todo container background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-text {
+  font-family: Fantasy, sans-serif;
+  font-size: 8rem; /* large text */
+  color: white;
+  animation: pulseFade 3s ease-in-out forwards;
+}
+
+/* Pulse and fade animation */
+@keyframes pulseFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
