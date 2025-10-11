@@ -4,12 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TaskCol</title>
-  <link rel="stylesheet" href="Assets/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/project.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    /* Center the main-content container */
+    #main-content {
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center;     /* vertical center */
+      height: 100vh;           /* full viewport height */
+      flex-direction: column;  /* stack children vertically */
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Loading Screen (Keep Background #1) -->
+  <!-- Loading Screen -->
   <div 
     id="loading-screen" 
     style="--loading-bg: url('https://i.pinimg.com/originals/42/d9/55/42d9559ddcf1b263b93b680d06a545ab.gif') no-repeat center center / cover;"
@@ -17,9 +27,9 @@
     <h1 class="loading-text">Task<span>Col</span></h1>
   </div>
 
-  <!-- Main Content (Keep Background #2) -->
+  <!-- Main Content -->
   <div id="main-content" style="display:none;">
-    <h1 class="title">Col's Task List</h1>
+    <h1 class="title">- Col's Task List -</h1>
 
     <div id="todo-container" class="glass-card">
       <div class="input-group">
@@ -30,7 +40,7 @@
       <ul id="taskList"></ul>
 
       <div class="filters">
-        <button onclick="showAll()" class="filter-btn active">All</button>
+        <button onclick="showAll()" class="filter-btn">All</button>
         <button onclick="showActive()" class="filter-btn">Active</button>
         <button onclick="showCompleted()" class="filter-btn">Completed</button>
         <button onclick="clearCompleted()" class="filter-btn clear-btn">Clear Completed</button>
@@ -40,7 +50,7 @@
     </div>
   </div>
 
-  <script src="Assets/js/script.js"></script>
+  <script src="assets/js/project.js"></script>
   <script>
     // Fancy Loading Transition
     window.addEventListener('load', () => {
@@ -48,7 +58,7 @@
         document.getElementById('loading-screen').classList.add('fade-out');
         setTimeout(() => {
           document.getElementById('loading-screen').style.display = 'none';
-          document.getElementById('main-content').style.display = 'block';
+          document.getElementById('main-content').style.display = 'flex'; // changed to flex here
         }, 800);
       }, 2500);
     });
