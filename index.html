@@ -5,29 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TaskCol</title>
   <link rel="stylesheet" href="Assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div id="loading-screen" style="--loading-bg: url('https://i.pinimg.com/originals/42/d9/55/42d9559ddcf1b263b93b680d06a545ab.gif') no-repeat center center / cover;">
-    <h1 class="loading-text">Task Col</h1>
+  <!-- Loading Screen (Keep Background #1) -->
+  <div 
+    id="loading-screen" 
+    style="--loading-bg: url('https://i.pinimg.com/originals/42/d9/55/42d9559ddcf1b263b93b680d06a545ab.gif') no-repeat center center / cover;"
+  >
+    <h1 class="loading-text">Task<span>Col</span></h1>
   </div>
 
-  <!-- Main Content (hidden initially) -->
+  <!-- Main Content (Keep Background #2) -->
   <div id="main-content" style="display:none;">
-    <h1>Col's Task List</h1>
+    <h1 class="title">Col's Task List</h1>
 
-    <div id="todo-container">
-      <input type="text" id="taskInput" placeholder="Enter a new task" />
-      <button onclick="addTask()">Add Task</button>
+    <div id="todo-container" class="glass-card">
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter a new task..." />
+        <button onclick="addTask()" class="neon-btn">Add</button>
+      </div>
 
       <ul id="taskList"></ul>
 
       <div class="filters">
-        <button onclick="showAll()">All</button>
-        <button onclick="showActive()">Active</button>
-        <button onclick="showCompleted()">Completed</button>
-        <button onclick="clearCompleted()">Clear Completed</button>
+        <button onclick="showAll()" class="filter-btn active">All</button>
+        <button onclick="showActive()" class="filter-btn">Active</button>
+        <button onclick="showCompleted()" class="filter-btn">Completed</button>
+        <button onclick="clearCompleted()" class="filter-btn clear-btn">Clear Completed</button>
       </div>
 
       <p id="taskCount"></p>
@@ -36,12 +42,15 @@
 
   <script src="Assets/js/script.js"></script>
   <script>
-    // Wait until page loads then hide loading screen after 3 seconds
+    // Fancy Loading Transition
     window.addEventListener('load', () => {
       setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-      }, 3000);
+        document.getElementById('loading-screen').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('loading-screen').style.display = 'none';
+          document.getElementById('main-content').style.display = 'block';
+        }, 800);
+      }, 2500);
     });
   </script>
 </body>
