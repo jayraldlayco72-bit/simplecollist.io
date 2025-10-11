@@ -1,153 +1,193 @@
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === MAIN BACKGROUND (Keep your original background #2) === */
 body {
-  font-family: Fantasy, sans-serif;
-  padding: 20px;
+  font-family: 'Poppins', sans-serif;
   background: #F8F6F6 url('https://i.redd.it/gpb5hhtorbbb1.gif') no-repeat center center fixed;
   background-size: cover;
-  text-align: center;
-  margin: 0;
+  color: #fff;
   height: 100vh;
-}
-
-font-family: Fantasy, sans-serif;
-padding: 20px;
-background-color: #F8F6F6;
-text-align: center;
-}
-
-#todo-container {
-  max-width: 400px;
-  margin: auto;
-  background: #a21bff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #ccc;
-}
-
-input[type="text"] {
-  width: 70%;
-  padding: 8px;
-  font-size: 14px;
-}
-
-button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 20px;
-}
-
-li {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
-}
-
-.filters {
-  margin-top: 15px;
-}
-
-.filters button {
-  margin-right: 5px;
-}
-
-/* Animation for adding a new task */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Make tasks fade and slide in smoothly when added */
-#taskList li {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInTask 0.4s ease forwards;
-}
-
-@keyframes fadeInTask {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Smooth hover highlight */
-#taskList li:hover {
-  background-color: #c67bff;
-  transition: background-color 0.2s;
-}
-
-/* Smooth color + strike-through transition for completed tasks */
-li.completed {
-  color: gray;
-  text-decoration: line-through;
-  transition: color 0.3s, text-decoration 0.3s;
-}
-
-/* Add a little "pop" when toggling completion */
-li.completed span {
-  animation: popTask 0.2s ease;
-}
-
-@keyframes popTask {
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Loading Screen Styles */
+/* === LOADING SCREEN (Keep your original background #1) === */
 #loading-screen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: var(--loading-bg); /* <-- Changed to use CSS variable */
+  inset: 0;
+  background: var(--loading-bg);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
 }
 
 .loading-text {
-  font-family: Fantasy, sans-serif;
-  font-size: 8rem;
-  color: white;
-  animation: pulseFade 3s ease-in-out forwards;
+  font-size: 5rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  animation: glowPulse 2s infinite alternate;
 }
 
-/* Pulse and fade animation */
-@keyframes pulseFade {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
+.loading-text span {
+  color: #a21bff;
 }
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #fff, 0 0 20px #a21bff; }
+  to { text-shadow: 0 0 40px #a21bff, 0 0 80px #fff; }
+}
+
+/* === TITLE === */
+.title {
+  font-size: 2.5rem;
+  text-shadow: 0 0 15px #a21bff, 0 0 40px #ffffff44;
+  margin-bottom: 30px;
+  animation: fadeInDown 1s ease;
+}
+
+/* === GLASSMORPHIC CONTAINER === */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 25px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 0 25px rgba(162, 27, 255, 0.4);
+  animation: fadeInUp 1s ease;
+}
+
+/* === INPUT AREA === */
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s;
+}
+
+input[type="text"]:focus {
+  background: rgba(255,255,255,0.4);
+}
+
+.neon-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #a21bff;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #a21bff, 0 0 25px #a21bff;
+  transition: all 0.3s ease;
+}
+
+.neon-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #a21bff, 0 0 40px #a21bff;
+}
+
+/* === TASK LIST === */
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+li {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+li:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.02);
+}
+
+li.completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+/* === FILTER BUTTONS === */
+.filters {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  margin: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #a21bff;
+  box-shadow: 0 0 10px #a21bff, 0 0 20px #a21bff;
+}
+
+.clear-btn {
+  color: #ff8888;
+}
+
+.clear-btn:hover {
+  background: rgba(255,0,0,0.3);
+}
+
+/* === TASK COUNTER === */
+#taskCount {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
