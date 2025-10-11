@@ -1,3 +1,6 @@
+/* === PIXELATED FONT === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 /* === RESET === */
 * {
   margin: 0;
@@ -5,9 +8,10 @@
   box-sizing: border-box;
 }
 
-/* === MAIN BACKGROUND (Keep your original background #2) === */
+/* === MAIN BACKGROUND === */
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Press Start 2P', cursive, monospace;
+  image-rendering: pixelated;
   background: #F8F6F6 url('https://i.redd.it/gpb5hhtorbbb1.gif') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
@@ -16,9 +20,32 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-/* === LOADING SCREEN (Keep your original background #1) === */
+/* === PIXEL PARTICLES BACKGROUND === */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 4px 4px;
+  animation: pixelDrift 15s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes pixelDrift {
+  from { transform: translate(0,0); }
+  to { transform: translate(-50px, -50px); }
+}
+
+#main-content, #loading-screen {
+  position: relative;
+  z-index: 2;
+}
+
+/* === LOADING SCREEN === */
 #loading-screen {
   position: fixed;
   inset: 0;
@@ -28,6 +55,8 @@ body {
   align-items: center;
   z-index: 1000;
   transition: opacity 1s ease, transform 1s ease;
+  image-rendering: pixelated;
+  overflow: hidden;
 }
 
 #loading-screen.fade-out {
@@ -35,42 +64,88 @@ body {
   transform: scale(1.1);
 }
 
+/* === CRT Flicker === */
+#loading-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  animation: crtFlicker 0.1s infinite;
+  pointer-events: none;
+}
+
+@keyframes crtFlicker {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* === LOADING TEXT === */
 .loading-text {
-  font-size: 5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 5px;
-  animation: glowPulse 2s infinite alternate;
+  letter-spacing: 2px;
+  animation:
+    pixelGlowPulse 1.5s infinite alternate,
+    pixelEntrance 1s ease;
+  filter: drop-shadow(0 0 3px #a21bff);
 }
 
 .loading-text span {
   color: #a21bff;
+  filter: drop-shadow(0 0 5px #a21bff);
 }
 
-@keyframes glowPulse {
-  from { text-shadow: 0 0 10px #fff, 0 0 20px #a21bff; }
-  to { text-shadow: 0 0 40px #a21bff, 0 0 80px #fff; }
+@keyframes pixelGlowPulse {
+  0% { filter: drop-shadow(0 0 1px #a21bff); }
+  100% { filter: drop-shadow(0 0 5px #a21bff); }
+}
+
+@keyframes pixelEntrance {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* === TITLE === */
 .title {
-  font-size: 2.5rem;
-  text-shadow: 0 0 15px #a21bff, 0 0 40px #ffffff44;
+  font-size: 1.5rem;
+  text-shadow: 0 0 5px #a21bff, 0 0 10px #ffffff44;
   margin-bottom: 30px;
-  animation: fadeInDown 1s ease;
+  animation: pixelFadeInDown 0.8s ease, neonPulse 2s infinite alternate;
 }
 
-/* === GLASSMORPHIC CONTAINER === */
+.title:hover {
+  animation: flicker 0.2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { text-shadow: 0 0 5px #a21bff, 0 0 10px #ffffff44; }
+  to { text-shadow: 0 0 15px #a21bff, 0 0 25px #ffffffaa; }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.3; }
+}
+
+/* === GLASS CARD === */
 .glass-card {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  border-radius: 15px;
-  padding: 25px;
+  backdrop-filter: blur(8px);
+  border-radius: 5px;
+  padding: 20px;
   width: 90%;
   max-width: 450px;
-  box-shadow: 0 0 25px rgba(162, 27, 255, 0.4);
-  animation: fadeInUp 1s ease;
+  box-shadow:
+    0 0 4px rgba(162, 27, 255, 0.6),
+    inset 0 0 3px rgba(162, 27, 255, 0.5);
+  animation: pixelFadeInUp 0.8s ease;
 }
 
 /* === INPUT AREA === */
@@ -82,35 +157,46 @@ body {
 
 input[type="text"] {
   flex: 1;
-  padding: 10px 12px;
+  padding: 8px 10px;
   border: none;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.7rem;
+  font-family: 'Press Start 2P', monospace;
   outline: none;
   transition: background 0.3s;
 }
 
 input[type="text"]:focus {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
 }
 
+/* === NEON BUTTON === */
 .neon-btn {
-  padding: 10px 20px;
+  padding: 8px 14px;
   border: none;
   background: #a21bff;
   color: #fff;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 3px;
   cursor: pointer;
-  box-shadow: 0 0 10px #a21bff, 0 0 25px #a21bff;
+  font-family: 'Press Start 2P', monospace;
+  box-shadow:
+    0 0 8px #a21bff,
+    0 0 20px #a21bff,
+    0 0 30px #a21bff;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .neon-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #a21bff, 0 0 40px #a21bff;
+  transform: scale(1.1);
+  box-shadow:
+    0 0 15px #a21bff,
+    0 0 30px #a21bff,
+    0 0 45px #a21bff;
 }
 
 /* === TASK LIST === */
@@ -118,26 +204,76 @@ ul {
   list-style: none;
   padding: 0;
   text-align: left;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
 }
 
 li {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.2s, transform 0.1s;
+  user-select: none;
+  animation: pixelPop 0.3s ease forwards;
 }
 
 li:hover {
-  background: rgba(255,255,255,0.15);
-  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
 }
 
 li.completed {
   text-decoration: line-through;
-  color: #ccc;
+  color: #888;
+  filter: grayscale(70%);
+  animation: pixelComplete 0.4s ease forwards;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none; /* Ensures there's no border */
+  color: #ff0055;
+  font-family: 'Press Start 2P', monospace !important;
+  font-weight: bold;
+  font-size: 0.5rem;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    0 0 0px #e8e8e8,
+    0 0 0px #fffdfe,
+    0 0 0px #ffffff,
+    inset 0 0 0px #ffffff;
+  filter: contrast(120%) brightness(120%);
+  image-rendering: pixelated;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.remove-btn::before {
+  content: "X";
+  display: block;
+  font-size: 0.7rem;
+  text-align: center;
+  color: inherit; /* Inherit button's color */
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition */
+}
+
+.remove-btn:hover {
+  transform: scale(1.0); /* Slightly scale the button */
+  box-shadow: none; /* Remove glow from the button itself */
+}
+
+.remove-btn:hover::before {
+  color: #FD4B86; /* Keep "X" color */
+  text-shadow: 0 0 5px #FD4B86, 0 0 5px #FD4B86, 0 0 10px #FD4B86; /* Glowing effect for the X */
 }
 
 /* === FILTER BUTTONS === */
@@ -149,45 +285,74 @@ li.completed {
 }
 
 .filter-btn {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   border: none;
-  padding: 8px 14px;
+  padding: 6px 12px;
   margin: 5px;
-  border-radius: 20px;
+  border-radius: 3px;
   cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
   transition: all 0.3s;
+  user-select: none;
 }
 
-.filter-btn.active,
+.filter-btn.active {
+  background: #a21bff;
+  box-shadow:
+    0 0 10px #a21bff,
+    0 0 20px #a21bff,
+    inset 0 0 4px #fff;
+}
+
 .filter-btn:hover {
   background: #a21bff;
-  box-shadow: 0 0 10px #a21bff, 0 0 20px #a21bff;
+  box-shadow:
+    0 0 8px #a21bff,
+    0 0 15px #a21bff;
 }
 
+/* === CLEAR BUTTON === */
 .clear-btn {
   color: #ff8888;
 }
 
 .clear-btn:hover {
-  background: rgba(255,0,0,0.3);
+  background: rgba(255, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 /* === TASK COUNTER === */
 #taskCount {
   margin-top: 15px;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   opacity: 0.8;
+  font-family: 'Press Start 2P', monospace;
 }
 
 /* === ANIMATIONS === */
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
+@keyframes pixelFadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+@keyframes pixelFadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pixelPop {
+  from { opacity: 0; transform: scale(0.8) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes pixelComplete {
+  0% { opacity: 1; filter: grayscale(0%); transform: scale(1); }
+  100% { opacity: 0.6; filter: grayscale(70%); transform: scale(0.98); }
+}
+
+button {
+  font-family: 'Press Start 2P', monospace !important;
 }
 
