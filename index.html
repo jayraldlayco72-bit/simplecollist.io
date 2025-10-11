@@ -4,28 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TaskCol</title>
-  <link rel="stylesheet" href="Assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/project.css" />
 </head>
 <body>
 
-  <h1>Col's Task List</h1>
-
-  <div id="todo-container">
-    <input type="text" id="taskInput" placeholder="Enter a new task" />
-    <button onclick="addTask()">Add Task</button>
-
-    <ul id="taskList"></ul>
-
-    <div class="filters">
-      <button onclick="showAll()">All</button>
-      <button onclick="showActive()">Active</button>
-      <button onclick="showCompleted()">Completed</button>
-      <button onclick="clearCompleted()">Clear Completed</button>
-    </div>
-
-    <p id="taskCount"></p>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <h1 class="loading-text">Task Col</h1>
   </div>
 
-  <script src="Assets/js/script.js"></script>
+  <!-- Main Content (hidden initially) -->
+  <div id="main-content" style="display:none;">
+    <h1>Col's Task List</h1>
+
+    <div id="todo-container">
+      <input type="text" id="taskInput" placeholder="Enter a new task" />
+      <button onclick="addTask()">Add Task</button>
+
+      <ul id="taskList"></ul>
+
+      <div class="filters">
+        <button onclick="showAll()">All</button>
+        <button onclick="showActive()">Active</button>
+        <button onclick="showCompleted()">Completed</button>
+        <button onclick="clearCompleted()">Clear Completed</button>
+      </div>
+
+      <p id="taskCount"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/project.js"></script>
+  <script>
+    // Wait until page loads then hide loading screen after 3 seconds
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }, 3000);
+    });
+  </script>
 </body>
 </html>
