@@ -1,17 +1,17 @@
 body {
-font-family: Fantasy, sans-serif;
+  font-family: Fantasy, sans-serif;
   padding: 20px;
-  background: #F8F6F6 url('https://wallpaperbat.com/img/649838-anime-dawn-wallpaper-top-free-anime-dawn-background.jpg') no-repeat center center fixed;
+  background: #F8F6F6 url('https://i.redd.it/gpb5hhtorbbb1.gif') no-repeat center center fixed;
   background-size: cover;
   text-align: center;
   margin: 0;
   height: 100vh;
 }
 
-  font-family: Fantasy, sans-serif;
-  padding: 20px;
-  background-color: #F8F6F6;
-  text-align: center;
+font-family: Fantasy, sans-serif;
+padding: 20px;
+background-color: #F8F6F6;
+text-align: center;
 }
 
 #todo-container {
@@ -122,7 +122,7 @@ li.completed span {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #a21bff; /* matches todo container background */
+  background: var(--loading-bg); /* <-- Changed to use CSS variable */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +131,7 @@ li.completed span {
 
 .loading-text {
   font-family: Fantasy, sans-serif;
-  font-size: 8rem; /* large text */
+  font-size: 8rem;
   color: white;
   animation: pulseFade 3s ease-in-out forwards;
 }
