@@ -1,4 +1,13 @@
 body {
+font-family: Fantasy, sans-serif;
+  padding: 20px;
+  background: #f90000 url('https://th.bing.com/th/id/R.158e0259b70616a82f66155815b32e09?rik=odKZMPe8lC9LUw&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fV1ypbeX.jpg&ehk=t3oH8EzSlnmLQarEMBXPPbTQ0XaBb%2fPuIaLCT7ERQCI%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+  background-size: cover;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+}
+
   font-family: Fantasy, sans-serif;
   padding: 20px;
   background-color: #f90000;
